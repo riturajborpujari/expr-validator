@@ -2,7 +2,7 @@
   "name": "expression-validator",
   "version": "0.1.0",
   "description": "A bare minimum expression validator",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "scripts": {
     "build": "tsc --project .",
     "prepare": "npm run build"

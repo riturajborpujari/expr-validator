@@ -16,6 +16,6 @@ const testExpr = {
 const validation25 = ExpressionValidator(testExpr, 25)
 console.log(validation25);      // false
 
-const validate15 = ExpressionValidator(testExpr, 15);
+const validation15 = ExpressionValidator(testExpr, 15);
 console.log(validation15);      // true
 ```
