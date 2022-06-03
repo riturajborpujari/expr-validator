@@ -1,0 +1,25 @@
+{
+  "name": "expression-validator",
+  "version": "0.1.0",
+  "description": "A bare minimum expression validator",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc --project .",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "validator",
+    "expression"
+  ],
+  "author": {
+    "name": "Rituraj Borpujari",
+    "url": "https://github.com/riturajborpujari"
+  },
+  "repository": {
+    "url": "https://github.com/riturajborpujari/expr-validator.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}
