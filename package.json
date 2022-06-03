@@ -1,6 +1,6 @@
 {
   "name": "expression-validator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A bare minimum expression validator",
   "main": "lib/index.js",
   "scripts": {
