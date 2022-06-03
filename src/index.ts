@@ -1,9 +1,11 @@
-import * as _Types from "./types";
+import { Expression, OPERATOR, VARIABLE, VARIABLE_DATA } from "./types";
+
+export * from "./types";
 
 export default function Validate(
-  expr: _Types.Expression,
+  expr: Expression,
   value: any,
-  context: _Types.VARIABLE_DATA = {}
+  context: VARIABLE_DATA = {}
 ) {
   if (expr === null) {
     return null;
@@ -13,7 +15,7 @@ export default function Validate(
     if (typeof expr === "string") {
       if (context[expr]) {
         return context[expr];
-      } else if (expr === _Types.VARIABLE.UNIX_CURR_TIME) {
+      } else if (expr === VARIABLE.UNIX_CURR_TIME) {
         return Date.now();
       }
     }
@@ -26,35 +28,33 @@ export default function Validate(
   }
 
   switch (op) {
-    case _Types.OPERATOR.EQUAL_TO:
+    case OPERATOR.EQUAL_TO:
       return value === Validate(expr[op], value, context);
-    case _Types.OPERATOR.NOT_EQUAL_TO:
+    case OPERATOR.NOT_EQUAL_TO:
       return value !== Validate(expr[op], value, context);
-    case _Types.OPERATOR.GREATER_THAN:
+    case OPERATOR.GREATER_THAN:
       return value > Validate(expr[op], value, context);
-    case _Types.OPERATOR.GREATER_THAN_OR_EQUAL_TO:
+    case OPERATOR.GREATER_THAN_OR_EQUAL_TO:
       return value >= Validate(expr[op], value, context);
-    case _Types.OPERATOR.LESS_THAN:
+    case OPERATOR.LESS_THAN:
       return value < Validate(expr[op], value, context);
-    case _Types.OPERATOR.LESS_THAN_OR_EQUAL_TO:
+    case OPERATOR.LESS_THAN_OR_EQUAL_TO:
       return value <= Validate(expr[op], value, context);
-    case _Types.OPERATOR.AND:
-      return (expr[op] as Array<_Types.Expression>).every((e) =>
+    case OPERATOR.AND:
+      return (expr[op] as Array<Expression>).every((e) =>
         Validate(e, value, context)
       );
-    case _Types.OPERATOR.OR:
-      return (expr[op] as Array<_Types.Expression>).some((e) =>
+    case OPERATOR.OR:
+      return (expr[op] as Array<Expression>).some((e) =>
         Validate(e, value, context)
       );
-    case _Types.OPERATOR.REGEX:
+    case OPERATOR.REGEX:
       return new RegExp(expr[op]).test(value);
-    case _Types.OPERATOR.IN:
+    case OPERATOR.IN:
       return (expr[op] as Array<any>).indexOf(value) !== -1;
-    case _Types.OPERATOR.NOT_IN:
+    case OPERATOR.NOT_IN:
       return (expr[op] as Array<any>).indexOf(value) === -1;
     default:
       throw new Error(`Unknown keyword '${op}'`);
   }
 }
-
-export const Types = _Types;
